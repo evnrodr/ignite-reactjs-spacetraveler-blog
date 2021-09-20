@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import { RichText } from "prismic-dom";
 import { useEffect } from "react";
 import Prismic from "@prismicio/client";
@@ -104,30 +104,35 @@ export default function Post({ post }: PostProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const prismic = getPrismicClient();
-  const posts = await prismic.query(
-    Prismic.predicates.at("document.type", "posts"),
-    {}
-  );
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const prismic = getPrismicClient();
+//   const posts = await prismic.query(
+//     Prismic.predicates.at("document.type", "posts"),
+//     {}
+//   );
 
-  const paths = posts.results.map((post) => {
-    return {
-      params: {
-        slug: post.uid,
-      },
-    };
-  });
+//   const paths = posts.results.map((post) => {
+//     return {
+//       params: {
+//         slug: post.uid,
+//       },
+//     };
+//   });
 
-  return {
-    paths,
-    fallback: true,
-  };
-};
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const prismic = getPrismicClient();
-  const response = await prismic.getByUID("posts", String(params?.slug), {});
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params,
+}) => {
+  const { slug } = params;
+
+  const prismic = getPrismicClient(req);
+  const response = await prismic.getByUID("posts", String(slug), {});
 
   const post = {
     first_publication_date: format(
