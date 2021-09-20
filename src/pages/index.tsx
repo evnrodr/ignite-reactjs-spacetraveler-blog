@@ -40,7 +40,7 @@ export default function Home({ postsPagination }: HomeProps) {
   const [nextPage, setNextPage] = useState<string>(postsPagination.next_page);
 
   async function handleNextPage() {
-    const postsResult = await fetch(`${nextPage}`).then((response) =>
+    const postsResult = await fetch(nextPage).then((response) =>
       response.json()
     );
 
