@@ -1,0 +1,51 @@
+.header {
+  img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+  }
+}
+
+.postContainer {
+  max-width: 1120px;
+  margin: 4rem auto;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .postInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    color: var(--body);
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .content {
+    margin-top: 2.5rem;
+    text-align: justify;
+
+    h2 {
+      margin-bottom: 2rem;
+      color: var(--heading);
+    }
+
+    ul,
+    li,
+    p {
+      margin-bottom: 1.2rem;
+      color: var(--body);
+    }
+
+    strong {
+      color: var(--highlight);
+    }
+  }
+}
