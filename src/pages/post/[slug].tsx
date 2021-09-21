@@ -61,6 +61,18 @@ export default function Post({ post }: PostProps) {
     return <h1>Carregando...</h1>;
   }
 
+  useEffect(() => {
+    let script = document.createElement("script");
+    let anchor = document.getElementById("inject-comments-for-uterances");
+    script.setAttribute("src", "https://utteranc.es/client.js");
+    script.setAttribute("crossorigin", "anonymous");
+    script.setAttribute("async", "true");
+    script.setAttribute("repo", "evnrodr/ignite-reactjs-spacetraveler-blog");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-dark");
+    anchor.appendChild(script);
+  }, []);
+
   return (
     <>
       <Head>
@@ -99,6 +111,7 @@ export default function Post({ post }: PostProps) {
             />
           </article>
         ))}
+        <div id="inject-comments-for-uterances" />
       </main>
     </>
   );
