@@ -57,10 +57,6 @@ export default function Post({ post }: PostProps) {
 
   const readTime = Math.ceil(wordCounter / 200);
 
-  if (router.isFallback) {
-    return <h1>Carregando...</h1>;
-  }
-
   useEffect(() => {
     let script = document.createElement("script");
     let anchor = document.getElementById("inject-comments-for-uterances");
@@ -72,6 +68,10 @@ export default function Post({ post }: PostProps) {
     script.setAttribute("theme", "github-dark");
     anchor.appendChild(script);
   }, []);
+
+  if (router.isFallback) {
+    return <h1>Carregando...</h1>;
+  }
 
   return (
     <>
